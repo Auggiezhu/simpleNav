@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-  background: red url(/wall.jpg) no-repeat center center;
+  background: red url(http://raw.githubusercontent.com/Auggiezhu/simpleNav/1dd8645c3adc14fe3fde2a1dc61c9d1b2f81fae6/wall.jpg) no-repeat center center;
   background-size: cover;
 }
 
