@@ -1,0 +1,70 @@
+@charset "UTF-8";
+body {
+  background: red url(/wall.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+main {
+  font: 12px/1.5 tahoma, arial, "Hiragino Sans GB", "宋体", sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main #myo {
+  padding: 50px;
+  background-color: rgba(17, 17, 17, 0.1);
+  border: 2px solid rgba(17, 17, 17, 0.1);
+  border-radius: 50px;
+}
+main #myo div:nth-child(2) {
+  margin-left: -30px;
+}
+main #myo div:nth-child(3) {
+  margin-left: -100px;
+}
+main #myo .row {
+  text-align: center;
+  margin-top: 20px;
+}
+main #myo .row kbd {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0px 10px;
+  display: inline-block;
+  width: 50px;
+  height: 40px;
+  background: linear-gradient(90deg, rgb(41, 41, 41) 0%, rgb(17, 17, 17) 100%);
+  color: #c5c5c5;
+  border: 1px solid #373737;
+  border-radius: 7px;
+  box-shadow: 0 0 0px 1px #1a1b1c, 0 0 0px 2px #1f2020, 0 3px 0 2px #080808;
+  text-transform: uppercase;
+  position: relative;
+}
+main #myo .row kbd img {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+}
+main #myo .row kbd span {
+  position: absolute;
+  top: 0;
+  left: 2px;
+}
+main #myo .row kbd .btnCss {
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  color: #c5c5c5;
+  font-size: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 2px;
+  display: none;
+}
+main #myo .row kbd:hover > .btnCss {
+  display: inline-block;
+}

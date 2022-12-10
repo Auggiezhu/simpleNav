@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>My Nav</title>
+		<link rel="stylesheet" href="./common.css" />
+		<link rel="stylesheet" href="./nav-demo.css" />
+	</head>
+	<body>
+		<header></header>
+		<main>
+			<div class="wrapper" id="myo"></div>
+		</main>
+		<footer></footer>
+		<script>
+			//1. 初始化数据
+			var keys = {
+				//keys用来储存键盘符号
+				0: ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+				1: ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+				2: ["z", "x", "c", "v", "b", "n", "m"],
+				length: 3,
+			};
+
+			var hash = {
+				//哈希用来跳转对应的网站
+				q: `wallhaven.cc`,
+				w: `www.iloveimg.com`,
+				e: `stackoverflow.com`,
+				r: `lol.qq.com`,
+			};
+			var hashInLocalStorage = getLocalStorage("zzz");
+
+			if (hashInLocalStorage != undefined) {
+				hash = hashInLocalStorage;
+			} else {
+				hash = {
+					//哈希用来跳转对应的网站
+					q: `wallhaven.cc`,
+					w: `www.iloveimg.com`,
+					e: `stackoverflow.com`,
+					r: `lol.qq.com`,
+				};
+			}
+			//2. 封装函数
+			function getLocalStorage(name) {
+				return JSON.parse(localStorage.getItem(name) || "null");
+			}
+			function tagC(tagName, attributes) {
+				var element = document.createElement(tagName);
+				for (let key in attributes) {
+					element[key] = attributes[key];
+				}
+				return element;
+			}
+			function createBtn(xx) {
+				var btn = tagC(`input`, {
+					type: "button",
+					value: "Edit",
+					className: "btnCss",
+					id: xx,
+				});
+				btn.onclick = function () {
+					var userInput = prompt(`请输入一个新的网址`);
+					hash[this.id] = userInput;
+					var img2 = this.previousSibling;
+					img2.src = "http://" + userInput + "/favicon.ico";
+					img2.onerror = function (xx) {
+						this.src = `http://upload.wikimedia.org/wikipedia/commons/5/5d/Checker-16x16.png`;
+						this.style = `width:2px;height:2px;`;
+					};
+					localStorage.setItem(`zzz`, JSON.stringify(hash));
+				};
+				return btn;
+			}
+			function createIcon(xx) {
+				var icons = tagC(`img`, {
+					src: "",
+					style: "",
+				});
+				if (hash[xx]) {
+					icons.src = "http://" + hash[xx] + "/favicon.ico";
+				} else {
+					icons.src = `http://upload.wikimedia.org/wikipedia/commons/5/5d/Checker-16x16.png`;
+					icons.style = `width:2px;height:2px;`;
+				}
+				icons.onerror = function (yy) {
+					this.src = `http://upload.wikimedia.org/wikipedia/commons/5/5d/Checker-16x16.png`;
+					this.style = `width:2px;height:2px;`;
+				};
+				return icons;
+			}
+			//3. 遍历keys生成键盘
+			for (let i = 0; i < keys.length; i++) {
+				var div1 = tagC(`div`, { className: "row" });
+				myo.appendChild(div1);
+				for (let j = 0; j < keys[i][`length`]; j++) {
+					var kbd = tagC(`kbd`, { className: "kbd" });
+					div1.appendChild(kbd);
+					var sp1 = tagC(`span`);
+					sp1.textContent = keys[i][j];
+					var keyID = keys[i][j];
+					var btn = createBtn(keyID);
+					var icons = createIcon(keyID);
+					kbd.appendChild(icons);
+					kbd.appendChild(btn);
+					kbd.appendChild(sp1);
+				}
+			}
+			document.onkeypress = function (xx) {
+				window.open(`http://` + hash[xx.key], `_blank`);
+			};
+		</script>
+	</body>
+</html>
